@@ -1,8 +1,8 @@
 FROM node
-ENV HOME /app
+WORKDIR /app
 COPY . .
 RUN npm install
-EXPOSE 3000
-ENTRYPOINT npm start
+EXPOSE 80
+CMD PORT=80 npm start
 
 #CMD ["npm", "start"]
