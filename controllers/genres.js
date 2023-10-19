@@ -1,5 +1,5 @@
 const express = require('express');
-const Genre = require('../models/genre')
+const Genre = require('../models/genre');
 
 function create(req, res, next){
     const description = req.body.description;

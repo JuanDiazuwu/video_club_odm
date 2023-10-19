@@ -1,5 +1,5 @@
 const express = require('express');
-const Actor = require('../models/actor')
+const Actor = require('../models/actor');
 
 function create(req, res, next){
     const name = req.body.name;

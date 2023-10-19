@@ -1,5 +1,5 @@
 const express = require('express');
-const Director = require('../models/director')
+const Director = require('../models/director');
 
 function create(req, res, next){
     const name = req.body.name;
