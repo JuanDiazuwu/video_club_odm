@@ -19,7 +19,7 @@ class User {
     get name(){ return this._name; }
     set name(v){ this._name = v; }
 
-    get lastName() { return this._lastNameame; } 
+    get lastName() { return this._lastName; } 
     set lastName(v) { this._lastName = v; }
 
     get email() { return this._email; }

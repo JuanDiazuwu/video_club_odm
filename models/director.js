@@ -12,18 +12,11 @@ class Director {
         this._lastName = lastName;
     }
 
-    get name(){
-        return this._name;
-    }
-    set name(v){
-        this._name = v;
-    }
-    get lastName(){
-        return this._lastNameame;
-    }
-    set lastName(v){
-        this._lastName = v;
-    }
+    get name(){ return this._name; }
+    set name(v){ this._name = v; }
+    
+    get lastName(){ return this._lastName; }
+    set lastName(v){ this._lastName = v; }
 }
 
 schema.loadClass(Director);
