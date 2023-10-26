@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const mongoosePaginate = require('mongoose-paginate-v2');
 
 // Schema: Estructura que representa la coneccione que se encuentra en la base de datos
 const schema = mongoose.Schema({
@@ -20,4 +21,5 @@ class Director {
 }
 
 schema.loadClass(Director);
+schema.plugin(mongoosePaginate);
 module.exports = mongoose.model('Director', schema);
