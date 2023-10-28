@@ -31,22 +31,22 @@ function create(req, res, next){
 }
 
 function list(req, res, next) {
-    User.find().then(objs => res.status(200).json({
-        message:"Lista de usuarios",
+    Member.find().then(objs => res.status(200).json({
+        message:"Lista de member",
         obj:objs
     })).catch(ex => res.status(500).json({
-        message:"No se puedo consultar la lista de usuarios",
+        message:"No se puedo consultar la lista de miembros",
         obj:ex
     }));
 }
 
 function index(req, res, next){
     const id = req.params.id;
-    User.findOne({"_id":id}).then(obj => res.status(200).json({
-        message:`Usuario con el id ${id}`,
+    Member.findOne({"_id":id}).then(obj => res.status(200).json({
+        message:`Miembro con el id ${id}`,
         obj:obj
     })).catch(ex => res.status(500).json({
-        message:`No se puedo consultar el usuario con el id: ${id}`,
+        message:`No se puedo consultar el miembro con el id: ${id}`,
         obj:ex
     }));
 }
@@ -55,17 +55,17 @@ function replace(req, res, next){
     const id = req.params.id;
     let name = req.body.name ? req.body.name : "";
     let lastName = req.body.lastName ? req.body.lastName : "";
-    let email = req.body.email ? req.body.email : "";
-    let password = req.body.password ? req.body.password : "";
-    let user = new Object({
-        _name:name, _lastName:lastName, _email:email, _password:password
+    let address = req.body.address ? req.body.address : "";
+    let phone = req.body.phone ? req.body.phone : "";
+    let member = new Object({
+        _name:name, _lastName:lastName, _address:address, _phone:phone
     });
-    User.findOneAndUpdate({"_id":id}, user, {new:true})
+    Member.findOneAndUpdate({"_id":id}, member, {new:true})
             .then(obj => res.status(200).json({
-                message:`Usuario reemplazado correctamente, con el id: ${id}`,
+                message:`Miembro reemplazado correctamente, con el id: ${id}`,
                 obj:obj
             })).catch(ex => res.status(500).json({
-                message:`No se puedo reemplazar el usuario con el id: ${id}`,
+                message:`No se puedo reemplazar el miembro con el id: ${id}`,
                 obj:ex
             }));
 }
@@ -74,30 +74,30 @@ function update(req, res, next){
     const id = req.params.id;
     let name = req.body.name;
     let lastName = req.body.lastName;
-    let email = req.body.email;
-    let password = req.body.password;
-    let user = new Object();
-    if(name) user._name = name;
-    if(lastName) user._lastName = lastName;
-    if(email) user._email = email;
-    if(password) user._password = password;
-    User.findOneAndUpdate({"_id":id}, user)
+    let address = req.body.address;
+    let phone = req.body.phone;
+    let member = new Object();
+    if(name) member._name = name;
+    if(lastName) member._lastName = lastName;
+    if(address) member._address = address;
+    if(phone) member._phone = phone;
+    Member.findOneAndUpdate({"_id":id}, member)
             .then(obj => res.status(200).json({
-                message:`Usuario actualizado corretamente, con el id: ${id}`,
+                message:`Miembro actualizado corretamente, con el id: ${id}`,
                 obj:obj
             })).catch(ex => res.status(500).json({
-                message:`No se puedo actualizar el usuario con el id: ${id}`,
+                message:`No se pudo actualizar el miembro con el id: ${id}`,
                 obj:ex
             }));
 }
 
 function destroy(req, res, next){
     const id = req.params.id;
-    User.findByIdAndRemove({"_id":id}).then(obj => res.status(200).json({
-        message:`Usuario eliminado correctamente, contaba con el id: ${id}`,
+    Member.findByIdAndRemove({"_id":id}).then(obj => res.status(200).json({
+        message:`Miembro eliminado correctamente, contaba con el id: ${id}`,
         obj:obj
     })).catch(ex => res.status(500).json({
-        message:`No se puedo eliminar el usuario con el id: ${id}`,
+        message:`No se puedo eliminar el miembro con el id: ${id}`,
         obj:ex
     }));
 }
