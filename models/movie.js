@@ -9,7 +9,11 @@ const schema = mongoose.Schema({
     _genre: {
         type: mongoose.Schema.ObjectId,
         ref: 'Genre'
-    }
+    },
+    _cast: [{
+        type: mongoose.Schema.ObjectId,
+        ref: 'Actor'
+    }]
 });
 
 class Movie {

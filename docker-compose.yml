@@ -1,0 +1,18 @@
+version: '3'
+services:
+
+  db_mongo:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=3000
+    depends_on:
+      - db_mongo
+    command: 
+      npm run start

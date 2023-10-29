@@ -17,7 +17,8 @@ const copiesRouter = require('./routes/copies');
 
 const app = express();
 //mongodb://<dbUser>?:<dbPass>?@<url>:<port>/<dbName>
-const url = "mongodb://localhost:27017/monguito"
+//const url = "mongodb://localhost:27017/monguito"
+const url = 'mongodb://db_mongo:27017/video_club';
 mongoose.connect(url);
 
 const db = mongoose.connection;
