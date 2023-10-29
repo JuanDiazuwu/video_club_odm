@@ -1,15 +1,19 @@
 const express = require('express');
 const Director = require('../models/director');
-const Movie = require('../models/movie')
+const Movie = require('../models/movie');
+const Genre = require('../models/genre');
 
 async function create(req, res, next){
     const title = req.body.title;
     const directorId = req.body.directorId;
+    const genreId = req.body.genreId;
 
     let director = await Director.findOne({"_id":directorId});
+    let genre = await Genre.findOne({"_id":genreId});
     let movie = new Movie({
         title:title,
-        director:director
+        director:director,
+        genre:genre
     });
     movie.save().then(obj => res.status(200).json({
         message: "Pelicula almacenada correctamente",
@@ -21,7 +25,7 @@ async function create(req, res, next){
 }
 
 function list(req, res, next) {
-    Movie.find().populate("_director").then(objs => res.status(200).json({
+    Movie.find().populate(["_director", "_genre"]).then(objs => res.status(200).json({
         message: "Lista de peliculas",
         obj: objs
     })).catch(ex => res.status(500).json({
@@ -32,62 +36,59 @@ function list(req, res, next) {
 
 function index(req, res, next){
     const id = req.params.id;
-    User.findOne({"_id":id}).then(obj => res.status(200).json({
-        message:`Usuario con el id ${id}`,
+    Movie.findOne({"_id":id}).populate(["_director", "_genre"]).then(obj => res.status(200).json({
+        message:`Pelicula con el id ${id}`,
         obj:obj
     })).catch(ex => res.status(500).json({
-        message:`No se puedo consultar el usuario con el id: ${id}`,
+        message:`No se puedo consultar la pelicula con el id: ${id}`,
         obj:ex
     }));
 }
 
 function replace(req, res, next){
     const id = req.params.id;
-    let name = req.body.name ? req.body.name : "";
-    let lastName = req.body.lastName ? req.body.lastName : "";
-    let email = req.body.email ? req.body.email : "";
-    let password = req.body.password ? req.body.password : "";
-    let user = new Object({
-        _name:name, _lastName:lastName, _email:email, _password:password
+    let title = req.body.title ? req.body.title : "";
+    let directorId = req.body.directorId ? req.body.directorId : ""; // No funciona si esta vacio
+    let genreId = req.body.genreId ? req.body.genreId: "";
+    let movie = new Object({
+        _title:title, _director:directorId, _genre:genreId
     });
-    User.findOneAndUpdate({"_id":id}, user, {new:true})
+    Movie.findOneAndUpdate({"_id":id}, movie, {new:true})
             .then(obj => res.status(200).json({
-                message:`Usuario reemplazado correctamente, con el id: ${id}`,
+                message:`Pelicula reemplazada correctamente, con el id: ${id}`,
                 obj:obj
             })).catch(ex => res.status(500).json({
-                message:`No se puedo reemplazar el usuario con el id: ${id}`,
+                message:`No se puedo reemplazar la pelicula con el id: ${id}`,
                 obj:ex
             }));
 }
 
 function update(req, res, next){
     const id = req.params.id;
-    let name = req.body.name;
-    let lastName = req.body.lastName;
-    let email = req.body.email;
-    let password = req.body.password;
-    let user = new Object();
-    if(name) user._name = name;
-    if(lastName) user._lastName = lastName;
-    if(email) user._email = email;
-    if(password) user._password = password;
-    User.findOneAndUpdate({"_id":id}, user)
+    let title = req.body.title;
+    let directorId = req.body.directorId;
+    let genreId = req.body.genreId;
+    let movie = new Object();
+    if(title) movie._title = title;
+    if(directorId) movie._director = directorId;
+    if(genreId) movie._genre = genreId;
+    Movie.findOneAndUpdate({"_id":id}, movie)
             .then(obj => res.status(200).json({
-                message:`Usuario actualizado corretamente, con el id: ${id}`,
+                message:`Pelicula actualizada corretamente, con el id: ${id}`,
                 obj:obj
             })).catch(ex => res.status(500).json({
-                message:`No se puedo actualizar el usuario con el id: ${id}`,
+                message:`No se puedo actualizar la pelicula con el id: ${id}`,
                 obj:ex
             }));
 }
 
 function destroy(req, res, next){
     const id = req.params.id;
-    User.findByIdAndRemove({"_id":id}).then(obj => res.status(200).json({
-        message:`Usuario eliminado correctamente, contaba con el id: ${id}`,
+    Movie.findByIdAndRemove({"_id":id}).then(obj => res.status(200).json({
+        message:`Pelicula eliminada correctamente, contaba con el id: ${id}`,
         obj:obj
     })).catch(ex => res.status(500).json({
-        message:`No se puedo eliminar el usuario con el id: ${id}`,
+        message:`No se puedo eliminar la pelicula con el id: ${id}`,
         obj:ex
     }));
 }

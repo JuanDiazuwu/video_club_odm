@@ -5,13 +5,18 @@ const schema = mongoose.Schema({
     _director: {
         type: mongoose.Schema.ObjectId,
         ref: 'Director'
+    },
+    _genre: {
+        type: mongoose.Schema.ObjectId,
+        ref: 'Genre'
     }
 });
 
 class Movie {
-    constructor(title, director){
+    constructor(title, director, genre){
         this._title = title;
         this._director = director;
+        this._genre = genre;
     }
 
     get title(){ return this._title; }
@@ -19,6 +24,9 @@ class Movie {
 
     get director() { return this._director; }
     set director(v) { this._director = v; }
+
+    get genre() { return this._genre; }
+    set genre(v) { this._genre = v; }
 }
 
 schema.loadClass(Movie);
