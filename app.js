@@ -12,6 +12,7 @@ const actorsRouter = require('./routes/actors');
 const genresRouter = require('./routes/genres');
 const membersRouter = require('./routes/members');
 const moviesRouter = require('./routes/movies');
+const bookingsRouter = require('./routes/bookings');
 
 const app = express();
 //mongodb://<dbUser>?:<dbPass>?@<url>:<port>/<dbName>
@@ -44,6 +45,7 @@ app.use('/actors', actorsRouter);
 app.use('/genres', genresRouter);
 app.use('/members', membersRouter);
 app.use('/movies', moviesRouter);
+app.use('/bookings', bookingsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
