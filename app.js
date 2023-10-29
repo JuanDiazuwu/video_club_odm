@@ -14,11 +14,12 @@ const membersRouter = require('./routes/members');
 const moviesRouter = require('./routes/movies');
 const bookingsRouter = require('./routes/bookings');
 const copiesRouter = require('./routes/copies');
+const awaitListsRouter = require('./routes/awaitLists');
 
 const app = express();
 //mongodb://<dbUser>?:<dbPass>?@<url>:<port>/<dbName>
-//const url = "mongodb://localhost:27017/monguito"
-const url = 'mongodb://db_mongo:27017/video_club';
+const url = "mongodb://localhost:27017/monguito"
+//const url = 'mongodb://db_mongo:27017/video_club';
 mongoose.connect(url);
 
 const db = mongoose.connection;
@@ -49,6 +50,7 @@ app.use('/members', membersRouter);
 app.use('/movies', moviesRouter);
 app.use('/bookings', bookingsRouter);
 app.use('/copies', copiesRouter);
+app.use('/awaitLists', awaitListsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
