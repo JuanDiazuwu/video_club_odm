@@ -34,7 +34,13 @@ Haciendo las clases de un `Video Club`.
 $ git clone git@github.com:JuanDiazuwu/video_club.git
 ```
 
-2. Entrar a la terminal, en la raíz el proyecto:
+2. Cambiar de rama:
+
+```
+git checkout ODM
+```
+
+3. Entrar a la terminal, en la raíz el proyecto:
 
 ```
 $ npm install 
