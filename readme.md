@@ -37,7 +37,7 @@ $ git clone git@github.com:JuanDiazuwu/video_club.git
 2. Cambiar de rama:
 
 ```
-git checkout ODM
+$ git checkout ODM
 ```
 
 3. Entrar a la terminal, en la raíz el proyecto:
