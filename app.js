@@ -18,9 +18,10 @@ const awaitListsRouter = require('./routes/awaitLists');
 
 const app = express();
 //mongodb://<dbUser>?:<dbPass>?@<url>:<port>/<dbName>
-const url = "mongodb://localhost:27017/monguito"
+//const url = "mongodb://localhost:27017/monguito"
 //const url = 'mongodb://db_mongo:27017/video_club';
-mongoose.connect(url);
+const url = 'mongodb://mongo:ffaG135ecC22Dh6-d5aBCEa1bAbHhbg-@monorail.proxy.rlwy.net:33035'
+mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true });
 
 const db = mongoose.connection;
 db.on('open', ()=> {
